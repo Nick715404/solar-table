@@ -1,0 +1,19 @@
+.section {
+  margin: 40px 0 120px;
+
+  @media (max-width: 768px) {
+    margin: 20px 0 60px;
+  }
+}
+
+.wrapper {
+  .title {
+    font-size: clamp(2.1875rem, 0.875rem + 6.5625vw, 8.75rem);
+    text-transform: uppercase;
+  }
+
+  .text {
+    font-size: clamp(1rem, 0.6rem + 2vw, 3rem);
+    line-height: 1;
+  }
+}

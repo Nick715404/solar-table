@@ -1,0 +1,23 @@
+.header {
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 12px;
+  }
+
+  .wrapper {
+    padding: 20px 20px;
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    @media (max-width: 768px) {
+      border-radius: 12px;
+      padding: 12px;
+    }
+  }
+}
