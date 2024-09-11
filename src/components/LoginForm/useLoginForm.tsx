@@ -14,6 +14,6 @@ export const useLoginForm = () => {
 		isLoading,
 		isValid,
 		reset,
-		register,
+		reg: register,
 	};
 };

@@ -1,23 +1,26 @@
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Box, FormHelperText, Typography } from '@mui/material';
 import { useLoginForm } from './useLoginForm';
+import { CustomInput } from '../FormElements';
+import { LoadingButton } from '@mui/lab';
+import Send from '@mui/icons-material/Send';
 
 export const LoginForm = () => {
-	const { errors, handleSubmit, isLoading, isValid, register, reset } =
+	const { errors, handleSubmit, isLoading, reg, isValid, reset } =
 		useLoginForm();
 
 	const onSubmit = (data: unknown) => {
 		console.log(data);
+		reset();
 	};
 
 	return (
 		<Box
 			onSubmit={handleSubmit(onSubmit)}
 			component='form'
-			bgcolor='#202020'
 			display='flex'
 			flexDirection='column'
 			gap='10px'
-			border='1px solid black'
+			border='2px solid black'
 			borderRadius='20px'
 			padding='20px'
 			margin='0 auto'
@@ -31,27 +34,51 @@ export const LoginForm = () => {
 				variant='h5'
 				align='center'
 				gutterBottom
+				sx={{ color: '#202020' }}
 			>
-				Login
+				Log in
 			</Typography>
-			<TextField
-				{...register('username', { required: 'This field is required!' })}
+			<CustomInput
+				register={reg}
+				name='username'
+				type='text'
 				label='Username'
-				variant='standard'
-				fullWidth
-				required
+				reqOptions={{
+					required: 'This fiel is required',
+				}}
 			/>
-			<TextField
-				{...register('password', { required: 'This field is required!' })}
-				label='Password'
+			{errors.username?.message && (
+				<FormHelperText
+					sx={{ color: 'red' }}
+				>{`${errors.username?.message}`}</FormHelperText>
+			)}
+			<CustomInput
+				register={reg}
+				name='password'
 				type='password'
-				variant='standard'
-				fullWidth
-				required
+				label='Password'
+				reqOptions={{
+					minLength: {
+						value: 6,
+						message: 'Password must be more then 6 symbols',
+					},
+				}}
 			/>
-			<Button type='submit' variant='contained' color='primary' fullWidth>
-				Отправить
-			</Button>
+			{errors.password?.message && (
+				<FormHelperText
+					sx={{ color: 'red' }}
+				>{`${errors.password?.message}`}</FormHelperText>
+			)}
+			<LoadingButton
+				disabled={!isValid ? true : false}
+				startIcon={<Send />}
+				loadingPosition='center'
+				variant='contained'
+				loading={isLoading}
+				type='submit'
+			>
+				Send
+			</LoadingButton>
 		</Box>
 	);
 };

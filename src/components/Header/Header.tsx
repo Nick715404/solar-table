@@ -1,20 +1,18 @@
-import { Box, Button } from '@mui/material';
 import styles from './styles.module.scss';
-import { Link } from 'react-router-dom';
+import { Box, Link } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Header = () => {
 	return (
 		<header className={styles.header}>
 			<Box className='container'>
 				<Box className={styles.wrapper}>
-					<Button variant='contained'>
-						<Link to='/'></Link>
+					<Link to='/' component={RouterLink}>
 						Home
-					</Button>
-					<Button variant='contained'>
-						<Link to='/login'></Link>
+					</Link>
+					<Link to='/login' component={RouterLink}>
 						Login
-					</Button>
+					</Link>
 				</Box>
 			</Box>
 		</header>
