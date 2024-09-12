@@ -5,14 +5,21 @@ import { LoadingButton } from '@mui/lab';
 import Send from '@mui/icons-material/Send';
 import { TLoginForm } from './loginForm-types';
 import { getAuthToken } from '../../api';
-import { useCookies } from 'react-cookie';
 
 export const LoginForm = () => {
-	const [_, setCookie] = useCookies(['accessToken']);
-	const { errors, handleSubmit, isLoading, reg, isValid, reset } =
-		useLoginForm();
+	const {
+		errors,
+		handleSubmit,
+		reg,
+		isValid,
+		navigator,
+		setCookie,
+		loading,
+		setLoading,
+	} = useLoginForm();
 
 	const onSubmit = async (formData: TLoginForm) => {
+		setLoading('loading');
 		const {
 			data: { token },
 		} = await getAuthToken(formData);
@@ -22,7 +29,8 @@ export const LoginForm = () => {
 			secure: true,
 			sameSite: 'strict',
 		});
-		reset();
+		setLoading('pending');
+		navigator('/', { replace: true });
 	};
 
 	return (
@@ -86,7 +94,7 @@ export const LoginForm = () => {
 				startIcon={<Send />}
 				loadingPosition='center'
 				variant='contained'
-				loading={isLoading}
+				loading={loading === 'loading' && true}
 				type='submit'
 			>
 				Send

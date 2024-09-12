@@ -2,6 +2,7 @@ import styles from './styles.module.scss';
 import { Box, Link } from '@mui/material';
 import { useCookies } from 'react-cookie';
 import { Link as RouterLink } from 'react-router-dom';
+import { LogoutButton } from '../LogoutButton/LogoutButton';
 
 export const Header = () => {
 	const [cookies] = useCookies(['accessToken']);
@@ -13,11 +14,9 @@ export const Header = () => {
 						Home
 					</Link>
 					{cookies.accessToken ? (
-						<Link to='/logut' component={RouterLink}>
-							logut
-						</Link>
+						<LogoutButton />
 					) : (
-						<Link to='#' component={RouterLink}>
+						<Link to='/login' component={RouterLink}>
 							Login
 						</Link>
 					)}
