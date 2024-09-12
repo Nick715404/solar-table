@@ -1,8 +1,8 @@
-import { TGetAuthToken } from '../types';
+import { TGetServerData } from '../types';
 
 export const getAuthToken = async (
 	formData: unknown
-): Promise<TGetAuthToken> => {
+): Promise<TGetServerData> => {
 	try {
 		const response = await fetch(
 			`${import.meta.env.VITE_API_HOST}/ru/data/v3/testmethods/docs/login`,
