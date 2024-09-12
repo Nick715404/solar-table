@@ -4,13 +4,24 @@ import { CustomInput } from '../FormElements';
 import { LoadingButton } from '@mui/lab';
 import Send from '@mui/icons-material/Send';
 import { TLoginForm } from './loginForm-types';
+import { getAuthToken } from '../../api';
+import { useCookies } from 'react-cookie';
 
 export const LoginForm = () => {
+	const [_, setCookie] = useCookies(['accessToken']);
 	const { errors, handleSubmit, isLoading, reg, isValid, reset } =
 		useLoginForm();
 
-	const onSubmit = (data: TLoginForm) => {
-		console.log(data);
+	const onSubmit = async (formData: TLoginForm) => {
+		const {
+			data: { token },
+		} = await getAuthToken(formData);
+		setCookie('accessToken', token, {
+			path: '/',
+			maxAge: 7 * 24 * 60 * 60,
+			secure: true,
+			sameSite: 'strict',
+		});
 		reset();
 	};
 
