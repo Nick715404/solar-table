@@ -3,12 +3,13 @@ import { useLoginForm } from './useLoginForm';
 import { CustomInput } from '../FormElements';
 import { LoadingButton } from '@mui/lab';
 import Send from '@mui/icons-material/Send';
+import { TLoginForm } from './loginForm-types';
 
 export const LoginForm = () => {
 	const { errors, handleSubmit, isLoading, reg, isValid, reset } =
 		useLoginForm();
 
-	const onSubmit = (data: unknown) => {
+	const onSubmit = (data: TLoginForm) => {
 		console.log(data);
 		reset();
 	};
